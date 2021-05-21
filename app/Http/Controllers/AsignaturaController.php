@@ -26,7 +26,7 @@ class AsignaturaController extends Controller
      */
     public function create()
     {
-        $asignaturas=Asignatura::getArrayIdNombre();
+        $asignaturas=Asignatura::array();
         return view('asignatura.create', compact('asignaturas'));
     }
 
