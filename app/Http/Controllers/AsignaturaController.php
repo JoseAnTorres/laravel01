@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asignatura;
+use Exception;
 use Illuminate\Http\Request;
 
 class AsignaturaController extends Controller
@@ -14,7 +15,8 @@ class AsignaturaController extends Controller
      */
     public function index()
     {
-        //
+        $asignatura=Asignatura::orderBy('nombre')->paginate(5);
+        return view('asignatura.index', compact('asignatura'));
     }
 
     /**
@@ -24,7 +26,8 @@ class AsignaturaController extends Controller
      */
     public function create()
     {
-        //
+        $asignaturas=Asignatura::getArrayIdNombre();
+        return view('asignatura.create', compact('asignaturas'));
     }
 
     /**
@@ -35,7 +38,17 @@ class AsignaturaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "nombre"=>['required','string','min:3', 'max:12', 'unique:asignaturas,nombre'],
+            "descripcion"=>['required','string','min:3', 'max:300'],
+            "creditos"=>['required','integer','digits_between:1,250'],
+        ]);
+        try{
+            Asignatura::create($request->all());
+        }catch(Exception){
+            return redirect()->route('asignatura.index');
+        }
+        return redirect()->route('asignatura.index');
     }
 
     /**
@@ -46,7 +59,7 @@ class AsignaturaController extends Controller
      */
     public function show(Asignatura $asignatura)
     {
-        //
+        return view('asignatura.show', compact('asignatura'));
     }
 
     /**
@@ -57,7 +70,7 @@ class AsignaturaController extends Controller
      */
     public function edit(Asignatura $asignatura)
     {
-        //
+        return view('asignatura.edit', compact('asignatura'));
     }
 
     /**
@@ -69,7 +82,17 @@ class AsignaturaController extends Controller
      */
     public function update(Request $request, Asignatura $asignatura)
     {
-        //
+        $request->validate([
+            "nombre"=>['required','string','min:3', 'max:12', 'unique:asignaturas,nombre'.$asignatura->id],
+            "descripcion"=>['required','string','min:3', 'max:300'],
+            "creditos"=>['required','integer','digits_between:1,250']
+        ]);
+        try{
+            $asignatura->update($request->all());
+        }catch(Exception){
+            return redirect()->route('asignatura.index');
+        }
+        return redirect()->route('asignatura.index');
     }
 
     /**
@@ -80,6 +103,11 @@ class AsignaturaController extends Controller
      */
     public function destroy(Asignatura $asignatura)
     {
-        //
+        try{
+            $asignatura->delete();
+        }catch(Exception){
+            return redirect()->route('asignatura.index');
+        }
+        return redirect()->route('asignatura.index');
     }
 }

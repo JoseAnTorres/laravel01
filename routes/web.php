@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AsignaturaController;
+use App\Http\Controllers\ProfesorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::resource('asignatura', AsignaturaController::class);
+Route::resource('profesor', ProfesorController::class);

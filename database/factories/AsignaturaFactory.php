@@ -22,7 +22,7 @@ class AsignaturaFactory extends Factory
     public function definition()
     {
         return [
-            'nombre'=>$this->faker->unique()->word(['Matematicas', 'Lengua', 'Geografia', 'Ciencias', 'Informatica']), //randomElement
+            'nombre'=>$this->faker->unique()->randomElement(['Matematicas', 'Lengua', 'Geografia', 'Ciencias', 'Informatica']),
             'descripcion'=>$this->faker->text(),
             'creditos'=>$this->faker->numberBetween(1,250)
         ];
