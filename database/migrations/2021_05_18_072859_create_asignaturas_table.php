@@ -18,6 +18,10 @@ class CreateAsignaturasTable extends Migration
             $table->string('nombre')->unique();
             $table->string('descripcion');
             $table->integer('creditos')->unsigned();
+            $table->foreignId('profesor_id');
+            $table->foreign('profesor_id')
+            ->references("id")->on('profesors')
+            ->onDelete("cascade")->onUpdate('cascade');
             $table->timestamps();
         });
     }

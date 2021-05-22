@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asignatura;
+use App\Models\Profesor;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -26,8 +27,8 @@ class AsignaturaController extends Controller
      */
     public function create()
     {
-        $asignaturas=Asignatura::array();
-        return view('asignatura.create', compact('asignaturas'));
+        $profesors=Profesor::array();
+        return view('asignatura.create', compact('profesors'));
     }
 
     /**
@@ -42,6 +43,7 @@ class AsignaturaController extends Controller
             "nombre"=>['required','string','min:3', 'max:12', 'unique:asignaturas,nombre'],
             "descripcion"=>['required','string','min:3', 'max:300'],
             "creditos"=>['required','integer','digits_between:1,250'],
+            'profesor_id' => ['required']
         ]);
         try{
             Asignatura::create($request->all());
@@ -70,7 +72,9 @@ class AsignaturaController extends Controller
      */
     public function edit(Asignatura $asignatura)
     {
-        return view('asignatura.edit', compact('asignatura'));
+
+        $profesors=Profesor::array();
+        return view('asignatura.edit', compact('asignatura','profesors'));
     }
 
     /**
@@ -85,7 +89,8 @@ class AsignaturaController extends Controller
         $request->validate([
             "nombre"=>['required','string','min:3', 'max:12', 'unique:asignaturas,nombre'.$asignatura->id],
             "descripcion"=>['required','string','min:3', 'max:300'],
-            "creditos"=>['required','integer','digits_between:1,250']
+            "creditos"=>['required','integer','digits_between:1,250'],
+            'profesor_id' => ['required']
         ]);
         try{
             $asignatura->update($request->all());

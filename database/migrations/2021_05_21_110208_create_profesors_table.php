@@ -19,10 +19,6 @@ class CreateProfesorsTable extends Migration
             $table->string('apellidos');
             $table->string('email')->unique();
             $table->string('localidad');
-            $table->foreignId('asignatura_id');
-            $table->foreign('asignatura_id')
-            ->references("id")->on('asignaturas')
-            ->onDelete("cascade")->onUpdate('cascade');
             $table->timestamps();
         });
     }

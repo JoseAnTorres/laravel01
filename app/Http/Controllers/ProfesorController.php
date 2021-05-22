@@ -27,8 +27,7 @@ class ProfesorController extends Controller
      */
     public function create()
     {
-        $asignaturas=Asignatura::array();
-        return view('profesor.create', compact('asignaturas'));
+        return view('profesor.create');
     }
 
     /**
@@ -43,8 +42,7 @@ class ProfesorController extends Controller
             "nombre" => ['required', 'string', 'min:3', 'max:30'],
             "apellidos" => ['required', 'string', 'min:3', 'max:50'],
             "email" => ['required', 'string', 'unique:profesors,email'],
-            "localidad" => ['required', 'string', 'min:3', 'max:30'],
-            'asignatura_id' => ['required']
+            "localidad" => ['required', 'string', 'min:3', 'max:30']
         ]);
         try {
             Profesor::create($request->all());
@@ -73,8 +71,7 @@ class ProfesorController extends Controller
      */
     public function edit(Profesor $profesor)
     {
-        $asignaturas=Asignatura::array();
-        return view('profesor.edit', compact('profesor','asignaturas'));
+        return view('profesor.edit', compact('profesor'));
     }
 
     /**
@@ -90,8 +87,7 @@ class ProfesorController extends Controller
             "nombre" => ['required', 'string', 'min:3', 'max:30'],
             "apellidos" => ['required', 'string', 'min:3', 'max:50'],
             "email" => ['required', 'string', 'unique:profesors,email'.$profesor->id],
-            "localidad" => ['required', 'string', 'min:3', 'max:50'],
-            'asignatura_id' => ['required']
+            "localidad" => ['required', 'string', 'min:3', 'max:50']
         ]);
         try{
             $profesor->update($request->all());

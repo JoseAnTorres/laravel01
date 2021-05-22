@@ -6,7 +6,6 @@
     <x-form-input name="apellidos" label="Apellidos" />
     <x-form-input name="email" label="Email" />
     <x-form-input name="localidad" label="Localidad" />
-    <x-form-select name="asignatura_id" :options="$asignaturas" label="Asignatura"/>
 
     <div class="mt-3">
     <button type="submit" class="mt-3 btn btn-info"><i class="fas fa-save"></i>Enviar</button>

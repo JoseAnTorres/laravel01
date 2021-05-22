@@ -22,13 +22,11 @@ class ProfesorFactory extends Factory
      */
     public function definition()
     {
-        $asignaturas=Asignatura::all('id');
         return [
             'nombre'=>$this->faker->firstName(),
             'apellidos'=>$this->faker->lastName,
             'email'=>$this->faker->unique()->freeEmail,
-            'localidad'=>$this->faker->city,
-            'asignatura_id'=>$asignaturas->get(rand(0, count($asignaturas)-1))
+            'localidad'=>$this->faker->city
         ];
     }
 }

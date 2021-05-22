@@ -8,18 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Asignatura extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre', 'descripcion', 'creditos'];
+    protected $fillable = ['nombre', 'descripcion', 'creditos', 'profesor_id'];
 
-    public static function array(){
-        $asignatura=Asignatura::orderBy('nombre')->get();
-        $array=[];
-        foreach($asignatura as $item){
-            $array[$item->id]=$item->nombre;
-        }
-        return $array;
-    }
-
-    public function profesores(){
-        return $this->hasMany(Profesor::class);
+    public function profesor(){
+        return $this->belongsTo(Profesor::class);
     }
 }

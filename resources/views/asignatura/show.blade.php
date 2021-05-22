@@ -5,14 +5,11 @@
     <h5 class="card-title">{{($asignatura->nombre)}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{$asignatura->descripcion}}</h6>
     <p class="card-text">Creditos: {{$asignatura->creditos}}</p>
-    <p class="card-text">
-      <b>Profesores</b>
-      <ul>
-        @foreach($asignatura->profesores as $item)
-          <li>{{$item->apellidos.", ".$item->nombre}}</a></li>
-        @endforeach
-      </ul>
-    </p>
+    <h6 class="card-subtitle mb-2 text-muted">
+        Profesor:
+        {{$asignatura->profesor->nombre}}
+        {{$asignatura->profesor->apellidos}}
+        </h6>
     <div class="mt-2">
         <a href="{{route('asignatura.index')}}" class='btn btn-primary mt-3'><i class="fas fa-undo"></i>Volver</a>
     </div>
