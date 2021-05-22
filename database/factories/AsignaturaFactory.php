@@ -24,7 +24,7 @@ class AsignaturaFactory extends Factory
     {
         $profesors=Profesor::all('id');
         return [
-            'nombre'=>$this->faker->unique()->randomElement(['Matematicas', 'Lengua', 'Geografia', 'Ciencias', 'Informatica']),
+            'nombre'=>$this->faker->unique()->randomElement(['Matematicas', 'Lengua', 'Geografia', 'Ciencias', 'Informatica', 'Economia', 'Base de datos', 'Astronomia', 'Teatro', 'Musica']),
             'descripcion'=>$this->faker->text(),
             'creditos'=>$this->faker->numberBetween(1,250),
             'profesor_id'=>$profesors->get(rand(0, count($profesors)-1))
